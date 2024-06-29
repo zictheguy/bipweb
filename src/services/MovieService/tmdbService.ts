@@ -57,3 +57,10 @@ export async function getMoviesByGenre(
   data.results.forEach((movie) => (movie.media_type = mediaType));
   return data;
 }
+
+export async function getTrendingAll(page: number) {
+  const { data } = await tmdbClient.get<TmdbPagingResponse>(
+    `/trending/all/week?language=en-US&page=${page}`,
+  );
+  return data;
+}

@@ -1,7 +1,13 @@
 import { siteConfig } from '@/configs/site';
 import { env } from '@/env.mjs';
 import MovieService from '@/services/MovieService';
-import type { CategorizedShows, KeyWord, KeyWordResponse, Show } from '@/types';
+import {
+  MediaType,
+  type CategorizedShows,
+  type KeyWord,
+  type KeyWordResponse,
+  type Show,
+} from '@/types';
 import { type AxiosResponse } from 'axios';
 import { clsx, type ClassValue } from 'clsx';
 import { cache } from 'react';
@@ -48,6 +54,14 @@ export function getSlug(id: number, name: string): string {
   // build slug from name and id
   const regex = /([^\x00-\x7F]|[&$\+,:;=\?@#\s<>\[\]\{\}|\\\^%])+/gm;
   return `${name.toLowerCase().replace(regex, '-')}-${id}`;
+}
+
+export function buildMovieUrl(show: Show): string {
+  const name = getNameFromShow(show);
+  const id = show.id;
+  return `${env.NEXT_PUBLIC_APP_URL}/${
+    show.media_type === MediaType.MOVIE ? 'movies' : 'tv-shows'
+  }/${getSlug(id, name)}`;
 }
 
 export function getIdFromSlug(slug: string): number {

@@ -30,7 +30,9 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/app/sitemap.xml",
+    "src/app/sitemap/[id]"
   ],
   "exclude": ["node_modules"]
 }
